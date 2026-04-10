@@ -1,1 +1,17 @@
-["10th_Percentage", "12th_Percentage", "BTech_CGPA", "No_of_Projects", "Internships", "Technical_Skills_Count", "Soft_Skills_Rating", "Backlogs", "Aptitude_Score", "Gender_Male", "Branch_CSE", "Branch_ECE", "Branch_EEE", "Branch_IT", "Branch_ME"]
+[
+  "10th_Percentage",
+  "12th_Percentage",
+  "BTech_CGPA",
+  "No_of_Projects",
+  "Internships",
+  "Technical_Skills_Count",
+  "Soft_Skills_Rating",
+  "Backlogs",
+  "Aptitude_Score",
+  "Gender_Male",
+  "Branch_CSE",
+  "Branch_ECE",
+  "Branch_EEE",
+  "Branch_IT",
+  "Branch_ME"
+]

@@ -57,7 +57,7 @@ if page == "Student Prediction":
 
     with col3:
         gender = st.selectbox("Gender", ["Male", "Female"])
-        branch = st.selectbox("Branch", ["CSE", "ECE", "ME", "CE", "EE"])
+        branch = st.selectbox("Branch", ["CSE", "ECE", "ME", "CE", "EEE", "IT"])
 
     if st.button("Predict Placement"):
         # Student input dictionary
@@ -115,7 +115,7 @@ if page == "Student Prediction":
             line_close=True,
             title="📈 Student Performance Profile"
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
 # ================== T&P DASHBOARD ==================
 elif page == "T&P Dashboard":
@@ -132,9 +132,9 @@ elif page == "T&P Dashboard":
         st.dataframe(df.head())
 
         # Metrics
-        if "Placement" in df.columns:
-            placed = df[df["Placement"] == 1].shape[0]
-            not_placed = df[df["Placement"] == 0].shape[0]
+        if "Placement_Status" in df.columns:
+            placed = df[df["Placement_Status"] == 1].shape[0]
+            not_placed = df[df["Placement_Status"] == 0].shape[0]
             total = df.shape[0]
 
             c1, c2, c3 = st.columns(3)
@@ -142,48 +142,44 @@ elif page == "T&P Dashboard":
             c2.metric("Placed", placed)
             c3.metric("Not Placed", not_placed)
 
-            # Placement Ratio
             fig1 = px.pie(
                 df,
-                names="Placement",
+                names="Placement_Status",
                 title="Placement Ratio"
             )
-            st.plotly_chart(fig1, use_container_width=True)
+            st.plotly_chart(fig1, width="stretch")
 
-        # Placement by Branch
-        if {"Branch", "Placement"}.issubset(df.columns):
+        if {"Branch", "Placement_Status"}.issubset(df.columns):
             fig2 = px.histogram(
                 df,
                 x="Branch",
-                color="Placement",
+                color="Placement_Status",
                 barmode="group",
                 title="Placement by Branch"
             )
-            st.plotly_chart(fig2, use_container_width=True)
+            st.plotly_chart(fig2, width="stretch")
 
-        # CGPA vs Placement
-        if {"BTech_CGPA", "Placement"}.issubset(df.columns):
+        if {"BTech_CGPA", "Placement_Status"}.issubset(df.columns):
             fig3 = px.box(
                 df,
-                x="Placement",
+                x="Placement_Status",
                 y="BTech_CGPA",
                 title="CGPA Distribution vs Placement"
             )
-            st.plotly_chart(fig3, use_container_width=True)
+            st.plotly_chart(fig3, width="stretch")
 
-        # Projects vs Placement
-        if {"No_of_Projects", "Placement"}.issubset(df.columns):
+        if {"No_of_Projects", "Placement_Status"}.issubset(df.columns):
             avg_proj = (
-                df.groupby("Placement")["No_of_Projects"]
+                df.groupby("Placement_Status")["No_of_Projects"]
                 .mean()
                 .reset_index()
             )
             fig4 = px.bar(
                 avg_proj,
-                x="Placement",
+                x="Placement_Status",
                 y="No_of_Projects",
                 title="Average Projects vs Placement"
             )
-            st.plotly_chart(fig4, use_container_width=True)
+            st.plotly_chart(fig4, width="stretch")
     else:
         st.info("📂 Please upload a CSV file to view placement analytics.")
