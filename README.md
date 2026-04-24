@@ -1,62 +1,58 @@
-# 🎓 Engineering College Placement Prediction & Analysis System
+# Engineering College Placement Prediction System
 
-A machine learning–based web application that predicts student placement outcomes
-and provides analytics for Training & Placement (T&P) teams.
+A major project for predicting engineering student placement outcomes using machine learning, with explainable AI and analytics dashboard.
 
----
+## Features
+- Multi-model comparison (Logistic Regression, Random Forest, XGBoost, Gradient Boosting, SVM, KNN)
+- SMOTE for class imbalance handling
+- Hyperparameter tuning with RandomizedSearchCV
+- SHAP explainability per prediction
+- Student prediction with probability gauge and radar chart
+- T&P Analytics Dashboard with correlation heatmap and at-risk student table
+- Batch prediction with CSV download
+- PDF report generation per student
 
-## 🚀 Features
+## Project Structure
+placement-prediction-system/
+├── data/                        # Dataset
+├── model/                       # Saved model artifacts
+├── src/
+│   ├── preprocess.py            # Data loading, encoding, SMOTE
+│   ├── predict.py               # Inference logic
+│   ├── evaluate.py              # Model comparison loader
+│   └── report_gen.py            # PDF report generator
+├── views/
+│   ├── student.py               # Student prediction page
+│   └── dashboard.py             # T&P dashboard page
+├── app.py                       # Streamlit entry point
+├── train.py                     # Model training pipeline
+└── config.yaml                  # Configuration
 
-### 👨‍🎓 Student Prediction Module
-- Predicts placement probability using a trained ML model
-- Accepts academic, technical, and aptitude inputs
-- Displays prediction confidence and performance profile
-
-### 🏢 T&P Analytics Dashboard
-- Upload placement datasets (CSV)
-- Visualize placement distribution and trends
-- Analyze placement by branch, CGPA, and project experience
-
----
-
-## 🧠 Machine Learning Approach
-- Algorithm: **Random Forest Classifier**
-- Feature Engineering: One-Hot Encoding
-- Probability-based predictions using `predict_proba`
-- Model persistence using Joblib
-
----
-
-## 🛠️ Tech Stack
-- Python 3.11
-- Pandas, NumPy
-- Scikit-learn
-- Streamlit
-- Plotly
-- Joblib
-
----
-
-## 📂 Project Structure
-placement_prediction_app/
-│
-├── app.py
-├── requirements.txt
-├── README.md
-│
-├── data/
-│ └── placement_cleaned.csv
-│
-├── model/
-│ ├── rf_placement_model.joblib
-│ └── feature_columns.json
-
----
-
-## ▶️ How to Run Locally
+## Setup
 ```bash
-python -m venv venv
-source venv/bin/activate
 pip install -r requirements.txt
-streamlit run app.py
+```
 
+## Train the Model
+```bash
+python train.py
+```
+
+## Run the App
+```bash
+streamlit run app.py
+```
+
+## Model Results
+| Model | Accuracy | F1 | ROC-AUC |
+| --- | --- | --- | --- |
+| Logistic Regression | 82.5% | 0.817 | 0.842 |
+| Random Forest | 82.5% | 0.809 | 0.854 |
+| XGBoost | 77.5% | 0.765 | 0.810 |
+| Gradient Boosting | 80.0% | 0.800 | 0.845 |
+| SVM | 62.5% | 0.639 | 0.313 |
+| KNN | 55.0% | 0.568 | 0.573 |
+
+## Tech Stack
+
+Python, Streamlit, scikit-learn, XGBoost, SHAP, imbalanced-learn, Plotly, fpdf2

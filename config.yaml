@@ -1,0 +1,16 @@
+paths:
+  data: "data/placement_cleaned.csv"
+  model: "model/best_placement_model.joblib"
+  features: "model/feature_columns.json"
+  comparison: "model/model_comparison.json"
+
+model:
+  target_column: "Placement_Status"
+  drop_columns: ["Student_ID", "Name"]
+  test_size: 0.2
+  random_state: 42
+  smote_random_state: 42
+
+app:
+  title: "Engineering College Placement Prediction System"
+  placement_threshold: 0.5
