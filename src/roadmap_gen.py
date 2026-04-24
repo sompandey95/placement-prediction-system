@@ -4,6 +4,7 @@ import json
 import logging
 import re
 
+import streamlit as st
 from src.advisor import chat_complete
 
 
@@ -356,7 +357,7 @@ Return ONLY this JSON structure (no markdown, no text outside JSON):
                 ]
             else:
                 return _fallback_roadmap()
-        except Exception:
+        except Exception as e:
             logger.exception("Roadmap generation failed on attempt %s", attempt + 1)
             if attempt == 0:
                 messages = [
@@ -367,6 +368,7 @@ Return ONLY this JSON structure (no markdown, no text outside JSON):
                     },
                 ]
             else:
+                st.error(f"Debug error: {e}")
                 return _fallback_roadmap()
 
     return _fallback_roadmap()

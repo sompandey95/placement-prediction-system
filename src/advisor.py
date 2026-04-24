@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+import streamlit as st
 from dotenv import load_dotenv
 
 
@@ -9,9 +10,9 @@ load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 def get_azure_client():
     try:
-        endpoint = os.getenv("AZURE_OPENAI_MINI_ENDPOINT")
-        api_key = os.getenv("AZURE_OPENAI_MINI_API_KEY")
-        api_version = os.getenv("AZURE_OPENAI_MINI_API_VERSION")
+        endpoint = st.secrets.get("AZURE_OPENAI_MINI_ENDPOINT") or os.getenv("AZURE_OPENAI_MINI_ENDPOINT")
+        api_key = st.secrets.get("AZURE_OPENAI_MINI_API_KEY") or os.getenv("AZURE_OPENAI_MINI_API_KEY")
+        api_version = st.secrets.get("AZURE_OPENAI_MINI_API_VERSION") or os.getenv("AZURE_OPENAI_MINI_API_VERSION")
 
         if not endpoint or not api_key or not api_version:
             raise ValueError("Azure OpenAI credentials not found in .env")
@@ -30,7 +31,7 @@ def get_azure_client():
 
 
 def get_deployment_name():
-    deployment = os.getenv("AZURE_OPENAI_MINI_DEPLOYMENT")
+    deployment = st.secrets.get("AZURE_OPENAI_MINI_DEPLOYMENT") or os.getenv("AZURE_OPENAI_MINI_DEPLOYMENT")
     if not deployment:
         raise ValueError("Azure OpenAI credentials not found in .env")
     return deployment

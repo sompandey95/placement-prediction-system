@@ -1,4 +1,5 @@
 import io
+import os
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -112,13 +113,11 @@ def render_floating_chat(student_dict: dict, prob: float, skills: list, pred: in
     Calls Azure OpenAI directly from JavaScript. No Streamlit rerun needed.
     """
     import json
-    from dotenv import dotenv_values
 
-    env = dotenv_values(".env")
-    api_key = env.get("AZURE_OPENAI_MINI_API_KEY", "")
-    endpoint = env.get("AZURE_OPENAI_MINI_ENDPOINT", "").rstrip("/")
-    api_version = env.get("AZURE_OPENAI_MINI_API_VERSION", "2025-04-01-preview")
-    deployment = env.get("AZURE_OPENAI_MINI_DEPLOYMENT", "gpt-4o-mini")
+    api_key = st.secrets.get("AZURE_OPENAI_MINI_API_KEY") or os.getenv("AZURE_OPENAI_MINI_API_KEY", "")
+    endpoint = (st.secrets.get("AZURE_OPENAI_MINI_ENDPOINT") or os.getenv("AZURE_OPENAI_MINI_ENDPOINT", "")).rstrip("/")
+    api_version = st.secrets.get("AZURE_OPENAI_MINI_API_VERSION") or os.getenv("AZURE_OPENAI_MINI_API_VERSION", "2025-04-01-preview")
+    deployment = st.secrets.get("AZURE_OPENAI_MINI_DEPLOYMENT") or os.getenv("AZURE_OPENAI_MINI_DEPLOYMENT", "gpt-4o-mini")
 
     result_text = "Likely to be Placed" if pred == 1 else "At Risk - Needs Improvement"
     skills_str = ", ".join(skills) if skills else "Not specified"
