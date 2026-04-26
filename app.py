@@ -2,7 +2,7 @@ import streamlit as st
 from views import student, dashboard
 
 st.set_page_config(
-    page_title="Engineering College Placement Prediction System",
+    page_title="AI-Powered Student Placement Intelligence Platform",
     layout="wide"
 )
 
@@ -87,7 +87,7 @@ st.markdown(
 )
 
 st.markdown(
-    '<h1 class="app-main-title">🎓 Engineering College Placement Prediction System</h1>',
+    '<h1 class="app-main-title">🎓 AI-Powered Student Placement Intelligence Platform</h1>',
     unsafe_allow_html=True,
 )
 

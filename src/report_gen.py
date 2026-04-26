@@ -38,7 +38,7 @@ class PlacementReport(FPDF):
         self.cell(
             0,
             12,
-            _latin1_safe("Engineering College Placement Prediction System"),
+            _latin1_safe("AI-Powered Student Placement Intelligence Platform"),
             border=0,
             ln=True,
             align="C",
