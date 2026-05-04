@@ -13,8 +13,10 @@ __pycache__/
 
 # Streamlit
 .streamlit/
+.streamlit/secrets.toml
 
 # Jupyter
 .ipynb_checkpoints/
 
-.streamlit/secrets.toml
+# Report
+CODEBASE_EXPLANATION_REPORT.md
